@@ -31,12 +31,18 @@
           console.log(facts.size());
           var newData = [{date: "2011-11-14T17:00:52Z", quantity: 22, total: 222, tip: 22, type: "visa"}]
           facts.add(newData)
-          console.log(facts.size());
-          console.log("--------console.log(facts)--------------------------");
-          console.log(facts);
-          console.log("--------print_filter(facts)--------------------------");
-          print_filter('facts');
-          console.log(facts.size());
+          console.log("facts.size():"+facts.size());
+
+          //alternate method of row count
+          console.log("facts.groupAll().value():"+facts.groupAll().value())
+          console.log("facts.size():"+facts.size());
+
+          //same as above : we get a reduceCount by default anyway
+          console.log("facts.groupAll().reduceCount().value():"+facts.groupAll().reduceCount().value())
+          console.log("facts.size():"+facts.size());
+          //remove all elements
+          facts.remove();
+          console.log("facts.size():"+facts.size());
       </script>
       Hello world
 
