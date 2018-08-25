@@ -27,17 +27,16 @@
             {date: "2011-11-14T17:25:45Z", quantity: 2, total: 200, tip: 0, type: "cash"},
             {date: "2011-11-14T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"}
           ];
-          console.log("----------------data------------------");
-          console.log(data);
-          console.log("----------------data.length------------------");
-          console.log(data.length);
-          console.log("----------------------------------");
           var facts = crossfilter(data);
+          console.log(facts.size());
+          var newData = [{date: "2011-11-14T17:00:52Z", quantity: 22, total: 222, tip: 22, type: "visa"}]
+          facts.add(newData)
+          console.log(facts.size());
           console.log("--------console.log(facts)--------------------------");
           console.log(facts);
           console.log("--------print_filter(facts)--------------------------");
           print_filter('facts');
-
+          console.log(facts.size());
       </script>
       Hello world
 
