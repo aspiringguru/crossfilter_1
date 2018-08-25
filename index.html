@@ -2,6 +2,7 @@
 <html lang = "en">
    <head>
      <title>crossfilter demo</title>
+      <script src = "js/print_filter.js"></script>
       <script src = "js/d3.v5.js"></script>
       <script src = "js/crossfilter.js"></script>
       <script src = "js/dc.js"></script>
@@ -26,12 +27,16 @@
             {date: "2011-11-14T17:25:45Z", quantity: 2, total: 200, tip: 0, type: "cash"},
             {date: "2011-11-14T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"}
           ];
+          console.log("----------------data------------------");
           console.log(data);
-          console.log("----------------------------------");
+          console.log("----------------data.length------------------");
           console.log(data.length);
           console.log("----------------------------------");
           var facts = crossfilter(data);
+          console.log("--------console.log(facts)--------------------------");
           console.log(facts);
+          console.log("--------print_filter(facts)--------------------------");
+          print_filter(facts);
 
       </script>
       Hello world
