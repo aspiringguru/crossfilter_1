@@ -29,15 +29,14 @@
           ];
           var facts = crossfilter(data);
           console.log(facts.size());
-          var newData = [{date: "2011-11-14T17:00:52Z", quantity: 22, total: 222, tip: 22, type: "visa"}]
-          facts.add(newData)
-          console.log("facts.size():"+facts.size());
+          console.log("_____________________________________")
+          //var typeDimension = facts.dimension(function(d){console.log(d); return d.type;});
+          //function will run once for each row in facts
+          console.log("_____________________________________")
+          var typeDimension = facts.dimension(function(d){console.log("tip:"+d.tip+", quantity:"+d.quantity); return d.type;});
+          //function will run once for each row in facts
+          console.log("_____________________________________")
 
-          //alternate method of row count
-          console.log("facts.groupAll().value():"+facts.groupAll().value())
-          console.log("facts.size():"+facts.size());
-
-          //same as above : we get a reduceCount by default anyway
           console.log("facts.groupAll().reduceCount().value():"+facts.groupAll().reduceCount().value())
           console.log("d.total:"+facts.groupAll().reduceSum(function(d){ return d.total;}).value());
           console.log("d.tip:"+facts.groupAll().reduceSum(function(d){ return d.tip;}).value());
