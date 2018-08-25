@@ -39,6 +39,9 @@
 
           //same as above : we get a reduceCount by default anyway
           console.log("facts.groupAll().reduceCount().value():"+facts.groupAll().reduceCount().value())
+          console.log("d.total:"+facts.groupAll().reduceSum(function(d){ return d.total;}).value());
+          console.log("d.tip:"+facts.groupAll().reduceSum(function(d){ return d.tip;}).value());
+          console.log("d.quantity:"+facts.groupAll().reduceSum(function(d){ return d.quantity;}).value());
           console.log("facts.size():"+facts.size());
           //remove all elements
           facts.remove();
