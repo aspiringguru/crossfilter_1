@@ -32,27 +32,28 @@
             //takes in string, converts to Date formate, replaces original data.date value
             var template = new Date(d.date);
             d.date = template;
-            d.quantity = d.quantity/10
           })
 
           var newData = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bitcoin"}]
           var newData2 = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bananas"}]
           var facts = crossfilter(data);
+
           var typeDimension = facts.dimension(function(d){return d.type;});
           var tipDimension = facts.dimension(function(d){return d.tip;});
           var scatterDimension = facts.dimension(function(d){return [d.total, d.tip];});
-          //var typeGroup = typeDimension.group()
-          //var typeGroup = typeDimension.group(function(d){return d;})
-          var typeGroup = typeDimension.group(function(d){ return d.substring(0,1); })
+          var dateDimension = facts.dimension(function(d){return d.date;});
 
-          facts.add(newData)
-          facts.add(newData2)
-          //newData & newData2 are summarised into the one line due to same firstletter in type.
-          //when typeDimension is group'd on substring(0,1) all b### types are grouped together
-          print_filter('typeGroup')
-          console.log(typeGroup.size())
-          console.log(typeGroup.all())
-          console.log(typeGroup.top(1))
+          var typeGroup = typeDimension.group(function(d){ return d.substring(0,1); })
+          //var dateGroup = dateDimension.group(function(d){ return d; })
+          var dateGroup = dateDimension.group(function(d){ return d.getHours(); })
+
+          //facts.add(newData)
+          //facts.add(newData2)
+
+          //print_filter('typeGroup')
+          //console.log(typeGroup.size())
+          print_filter('dateGroup')
+          console.log(dateGroup.size())
         </script>
       Hello world
 
