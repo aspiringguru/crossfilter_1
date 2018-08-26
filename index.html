@@ -43,12 +43,19 @@
           var scatterDimension = facts.dimension(function(d){return [d.total, d.tip];});
           var dateDimension    = facts.dimension(function(d){return d.date;});
 
-          var typeGroup = typeDimension.group(function(d){ return d.substring(0,1); })
+          var typeGroup = typeDimension.group()
+          //var typeGroup = typeDimension.group(function(d){ return d; })
+
+
           //var dateGroup = dateDimension.group(function(d){ return d; })
-          var dateGroup = dateDimension.group(function(d){ return d.getHours(); })
+          var dateGroup = dateDimension.group()
+          //var dateGroup = dateDimension.group(function(d){ return d.getHours(); })
+
           var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
 
-          print_filter('typeGroup.reduceSum(function(d){ return d.local; })')
+          print_filter('typeGroup.reduceSum(function(d){ return d.total; })')
+          console.log("-------------------------------------------------------")
+          print_filter('dateGroup.reduceSum(function(d){ return d.total; })')
         </script>
       Hello world
 
