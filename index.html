@@ -25,14 +25,16 @@
             {date: "2011-11-14T17:07:21Z", quantity: 2, total: 90, tip: 0, type: "tab"},
             {date: "2011-11-14T17:22:59Z", quantity: 2, total: 90, tip: 0, type: "tab"},
             {date: "2011-11-14T17:25:45Z", quantity: 2, total: 200, tip: 0, type: "cash"},
-            {date: "2011-11-14T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"}
+            {date: "2011-11-14T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"},
+            {date: "2011-11-13T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"},
+            {date: "2011-11-15T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"}
           ];
 
-          // data.forEach(function(d){
-          //   //takes in string, converts to Date formate, replaces original data.date value
-          //   var template = new Date(d.date);
-          //   d.date = template;
-          // })
+          data.forEach(function(d){
+            //takes in string, converts to Date formate, replaces original data.date value
+            var template = new Date(d.date);
+            d.date = template;
+          })
 
           //var newData = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bitcoin"}]
           //var newData2 = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bananas"}]
@@ -60,7 +62,12 @@
           function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
-          totalDimension.filterRange([105,305]);
+          dateDimension.filterRange([new Date("2011-11-13"), new Date("2011-11-14")]);
+          //totalDimension.filterRange([100,305]);
+          //typeDimension.filterRange(["cash", "visaa"]);
+          //filterRange works on text and numbers
+          //filterRange filters on greater than or equal to the start of range.
+          // but filters less than end of range.   ITS A TRAP
           print_filter('facts');
         </script>
       Hello world
