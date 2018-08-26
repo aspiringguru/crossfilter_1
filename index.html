@@ -38,46 +38,17 @@
           var newData2 = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bananas"}]
           var facts = crossfilter(data);
 
-          var typeDimension = facts.dimension(function(d){return d.type;});
-          var tipDimension = facts.dimension(function(d){return d.tip;});
+          var typeDimension    = facts.dimension(function(d){return d.type;});
+          var tipDimension     = facts.dimension(function(d){return d.tip;});
           var scatterDimension = facts.dimension(function(d){return [d.total, d.tip];});
-          var dateDimension = facts.dimension(function(d){return d.date;});
-
-          //var typeGroup = typeDimension.group()
-          //var typeGroup = typeDimension.group(function(d){ return d; })
-          //these two above lines are equivalent
+          var dateDimension    = facts.dimension(function(d){return d.date;});
 
           var typeGroup = typeDimension.group(function(d){ return d.substring(0,1); })
           //var dateGroup = dateDimension.group(function(d){ return d; })
           var dateGroup = dateDimension.group(function(d){ return d.getHours(); })
           var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
 
-          console.log(facts.groupAll().value());
-          console.log(facts.groupAll().reduceCount().value());
-          //these two lines are same., by default groupAll() run reduceCount()
-
-          console.log(typeDimension.groupAll().value());
-          console.log(typeDimension.groupAll().reduceCount().value());
-          //these two lines are same., by default groupAll() run reduceCount()
-
-          print_filter(typeDimension.groupAll());
-          print_filter(typeDimension.groupAll().reduceCount());
-          //these two lines are same., by default groupAll() run reduceCount()
-          console.log("-------------------print_filter(typeGroup)------------------")
-          print_filter(typeGroup)
-          console.log("-------------------print_filter(typeGroup)------------------")
-
-          var typeGroup2 = crossfilter(data).dimension(function(d){return d.type;}).group(function(d){ return d.substring(0,1); } );
-          console.log("-------------------print_filter(typeGroup2)------------------")
-          print_filter(typeGroup2)
-          console.log("-------------------print_filter(typeGroup2)------------------")
-          //this line replaces multiple lines above
-
-          console.log(typeDimension.groupAll().value());
-          console.log("--------------------------------------------------------------------")
-          console.log(facts.groupAll().reduceSum(function(d){ return d.total; }).value() );
-          console.log(typeDimension.groupAll().reduceSum(function(d){ return d.total; }).value() );
-
+          print_filter('typeGroup.reduceSum(function(d){ return d.local; })')
         </script>
       Hello world
 
