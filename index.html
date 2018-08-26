@@ -42,6 +42,7 @@
           var tipDimension     = facts.dimension(function(d){return d.tip;});
           var scatterDimension = facts.dimension(function(d){return [d.total, d.tip];});
           var dateDimension    = facts.dimension(function(d){return d.date;});
+          var totalDimension   = facts.dimension(function(d){return d.total;});
 
           var typeGroup = typeDimension.group()
           var dateGroup = dateDimension.group()
@@ -58,11 +59,13 @@
           function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
-          console.log("------------------------typeGroup.reduceCount()-------------------------------")
-          print_filter('typeGroup.reduceCount()');
-          console.log("-------typeGroup.reduce(reduceAdd, reduceRemove, reduceInitial)-------")
-          print_filter('typeGroup.reduce(reduceAdd, reduceRemove, reduceInitial)')
-          console.log("-------------------------------------------------------")
+          print_filter('totalDimension.filterExact(200)');
+          //filters the lines with data.total exactly 200
+          //console.log("------------------------typeGroup.reduceCount()-------------------------------")
+          //print_filter('typeGroup.reduceCount()');
+          //console.log("-------typeGroup.reduce(reduceAdd, reduceRemove, reduceInitial)-------")
+          //print_filter('typeGroup.reduce(reduceAdd, reduceRemove, reduceInitial)')
+          //console.log("-------------------------------------------------------")
         </script>
       Hello world
 
