@@ -59,13 +59,11 @@
           function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
+          console.log("------------------------totalDimension.filterExact(200)-------------------------------")
           print_filter('totalDimension.filterExact(200)');
-          //filters the lines with data.total exactly 200
-          //console.log("------------------------typeGroup.reduceCount()-------------------------------")
-          //print_filter('typeGroup.reduceCount()');
-          //console.log("-------typeGroup.reduce(reduceAdd, reduceRemove, reduceInitial)-------")
-          //print_filter('typeGroup.reduce(reduceAdd, reduceRemove, reduceInitial)')
-          //console.log("-------------------------------------------------------")
+          console.log("------------------------totalDimension.filter(200)-------------------------------")
+          print_filter('totalDimension.filter(200)');
+          //both outputs above exactly same.
         </script>
       Hello world
 
