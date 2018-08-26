@@ -44,18 +44,23 @@
           var dateDimension    = facts.dimension(function(d){return d.date;});
 
           var typeGroup = typeDimension.group()
-          //var typeGroup = typeDimension.group(function(d){ return d; })
-
-
-          //var dateGroup = dateDimension.group(function(d){ return d; })
           var dateGroup = dateDimension.group()
-          //var dateGroup = dateDimension.group(function(d){ return d.getHours(); })
-
           var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
 
-          print_filter('typeGroup.reduceSum(function(d){ return d.total; })')
+          //function reduceAdd(i, d){ return i+1;};
+          function reduceAdd(i, d){
+            console.log("input initial:"+i+", "+d.type+", output:"+(i+1));
+            return i+1;
+          };
+          //output values as the array is processed.
+          function reduceRemove(i, d){ return i-1;};
+          function reduceInitial(){ return 0;};//sets initial value of index.
+
+          console.log("------------------------typeGroup.reduceCount()-------------------------------")
+          print_filter('typeGroup.reduceCount()');
+          console.log("-------typeGroup.reduce(reduceAdd, reduceRemove, reduceInitial)-------")
+          print_filter('typeGroup.reduce(reduceAdd, reduceRemove, reduceInitial)')
           console.log("-------------------------------------------------------")
-          print_filter('dateGroup.reduceSum(function(d){ return d.total; })')
         </script>
       Hello world
 
