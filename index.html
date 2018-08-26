@@ -46,6 +46,7 @@
           var typeGroup = typeDimension.group(function(d){ return d.substring(0,1); })
           //var dateGroup = dateDimension.group(function(d){ return d; })
           var dateGroup = dateDimension.group(function(d){ return d.getHours(); })
+          var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
 
           //facts.add(newData)
           //facts.add(newData2)
@@ -54,6 +55,8 @@
           //console.log(typeGroup.size())
           print_filter('dateGroup')
           console.log(dateGroup.size())
+          print_filter('dayGroup')
+          console.log(dayGroup.size())
         </script>
       Hello world
 
