@@ -62,6 +62,7 @@
           function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
+          typeDimension.filter("tab")
           dateDimension.filterFunction(function(d){
             console.log("d.getHours():"+d.getHours())
             return d.getHours()==4;
@@ -69,10 +70,11 @@
             //return d.getDay()==2;
           });
           console.log("facts.groupAll().value():"+facts.groupAll().value());
-          //this obeys/uses the filters already defined above & returns a count of 6 rows
+          //this obeys/uses the ALL filters defined above & returns a count of 2 rows
 
           console.log("typeDimension.groupAll().value():"+typeDimension.groupAll().value());
-          //this gives same number of rows (6) as above.
+          //typeDimension.groupAll ignores the typeDimension.filter but responds to the dateDimension.filter
+
           console.log("dateDimension.groupAll().value():"+dateDimension.groupAll().value());
           //groupAll ignores filters on it's own dimension. returns 14
           //NB:  we added 2 rows to the original 12
