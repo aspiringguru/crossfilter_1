@@ -27,25 +27,33 @@
             {date: "2011-11-14T17:25:45Z", quantity: 2, total: 200, tip: 0, type: "cash"},
             {date: "2011-11-14T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"}
           ];
+
+          data.forEach(function(d){
+            //takes in string, converts to Date formate, replaces original data.date value
+            var template = new Date(d.date);
+            d.date = template;
+            d.quantity = d.quantity/10
+          })
+
+
           var facts = crossfilter(data);
           console.log(facts.size());
           console.log("_____________________________________")
-          //var typeDimension = facts.dimension(function(d){console.log(d); return d.type;});
+          var typeDimension = facts.dimension(function(d){console.log(d.type); return d.type;});
           //function will run once for each row in facts
-          console.log("_____________________________________")
-          var typeDimension = facts.dimension(function(d){console.log("tip:"+d.tip+", quantity:"+d.quantity); return d.type;});
-          //function will run once for each row in facts
-          console.log("_____________________________________")
 
-          console.log("facts.groupAll().reduceCount().value():"+facts.groupAll().reduceCount().value())
-          console.log("d.total:"+facts.groupAll().reduceSum(function(d){ return d.total;}).value());
-          console.log("d.tip:"+facts.groupAll().reduceSum(function(d){ return d.tip;}).value());
-          console.log("d.quantity:"+facts.groupAll().reduceSum(function(d){ return d.quantity;}).value());
-          console.log("facts.size():"+facts.size());
-          //remove all elements
-          facts.remove();
-          console.log("facts.size():"+facts.size());
-      </script>
+          var typeDimension = facts.dimension(function(d){return d.type;});
+          var tipDimension = facts.dimension(function(d){return d.tip;});
+          var multiDimension = facts.dimension(function(d){return d.type+":"+d.tip;});          //function will run once for each row in facts
+          var dateDimension = facts.dimension(function(d){
+                                                    var p = new Date(d.date);
+                                                    return p.getMonth()+"-"+p.getFullYear();
+          });
+          //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear
+          console.log("_____________________________________")
+          console.log(tipDimension.bottom(3))
+          console.log(multiDimension.top(3))
+        </script>
       Hello world
 
    </body>
