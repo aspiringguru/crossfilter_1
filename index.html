@@ -47,13 +47,9 @@
           var dateGroup = dateDimension.group()
           var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
 
-          //function reduceAdd(i, d){ return i+1;};
-          function reduceAdd(i, d){
-            console.log("input initial:"+i+", "+d.type+", output:"+(i+1));
-            return i+1;
-          };
-          //output values as the array is processed.
-          function reduceRemove(i, d){ return i-1;};
+          //now only calculate when tip is > 0
+          function reduceAdd(i, d)   { return d.tip>0? i+1: i; };
+          function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
           console.log("------------------------typeGroup.reduceCount()-------------------------------")
