@@ -62,23 +62,10 @@
           function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
-          typeDimension.filterFunction(function(d){
-            console.log("d:"+d);
-            return d.indexOf('vis')!=-1;
-          });
-          //NB: filterFunction must return value!!!
-          //tipDimension.filterFunction(function(d){ console.log(d); d>0});
-          //NB: function(d) would normally require d.tip to access tip
-          //because we are using tipDimension, function(d) is accessing tip value only.
-          print_filter('facts');
-          console.log("---------------------------")
-          typeDimension.filter(null)//clears existing filters on this Dimension
-          print_filter('facts');
-          console.log("---------------------------")
           dateDimension.filterFunction(function(d){
-            console.log(d.getHours())
-            return d.getHours()==17;
-          })
+            console.log("d.getHours():"+d.getHours())
+            return d.getHours()==3;
+          });
           console.log("---------------------------")
           print_filter('facts');
 
