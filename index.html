@@ -36,7 +36,7 @@
             d.date = template;
           })
 
-          //var newData = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bitcoin"}]
+          var newData = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bitcoin"}]
           //var newData2 = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bananas"}]
           var facts = crossfilter(data);
 
@@ -62,24 +62,26 @@
           function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
-          typeDimension.filter("tab")
-          dateDimension.filterFunction(function(d){
-            console.log("d.getHours():"+d.getHours())
-            return d.getHours()==4;
-            //console.log("d.getDay():"+d.getDay())
-            //return d.getDay()==2;
-          });
+          typeDimension.filter('tab')
+          console.log("--- only one filter : typeDimension.filter('tab') ----------------")
+
           console.log("facts.groupAll().value():"+facts.groupAll().value());
-          //this obeys/uses the ALL filters defined above & returns a count of 2 rows
-
           console.log("typeDimension.groupAll().value():"+typeDimension.groupAll().value());
-          //typeDimension.groupAll ignores the typeDimension.filter but responds to the dateDimension.filter
 
-          console.log("dateDimension.groupAll().value():"+dateDimension.groupAll().value());
-          //groupAll ignores filters on it's own dimension. returns 14
-          //NB:  we added 2 rows to the original 12
+          facts.remove()
+          console.log("-------after facts.remove() ----------------")
+          console.log("facts.groupAll().value():"+facts.groupAll().value());
+          console.log("typeDimension.groupAll().value():"+typeDimension.groupAll().value());
+          //NB: since filter on typeDimension has not been updated since facts.remove()
+          //typeDimension.groupAll 'sees' the results from when filter was created.
 
-          console.log("---------------------------")
+          typeDimension.filterAll();
+          //now the typeDimension is updated with facts.remove()
+          console.log("-------after typeDimension.filterAll() ----------------")
+          console.log("facts.groupAll().value():"+facts.groupAll().value());
+          console.log("typeDimension.groupAll().value():"+typeDimension.groupAll().value());
+
+
           print_filter('facts');
 
         </script>
