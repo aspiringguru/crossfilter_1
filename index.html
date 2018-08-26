@@ -35,27 +35,24 @@
             d.quantity = d.quantity/10
           })
 
-
+          var newData = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bitcoin"}]
+          var newData2 = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bananas"}]
           var facts = crossfilter(data);
-          console.log(facts.size());
-          console.log("_____________________________________")
-          var typeDimension = facts.dimension(function(d){console.log(d.type); return d.type;});
-          //function will run once for each row in facts
-
           var typeDimension = facts.dimension(function(d){return d.type;});
           var tipDimension = facts.dimension(function(d){return d.tip;});
-          var multiDimension = facts.dimension(function(d){return d.type+":"+d.tip;});
-          //function will run once for each row in facts
-          var arrayDimension = facts.dimension(function(d){return [d.type, d.tip];});
-          //returns array instead of single value
-          var dateDimension = facts.dimension(function(d){
-                                                    var p = new Date(d.date);
-                                                    return p.getMonth()+"-"+p.getFullYear();
-          });
-          //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear
-          console.log("_____________________________________")
-          console.log(tipDimension.bottom(3))
-          console.log(multiDimension.top(3))
+          var scatterDimension = facts.dimension(function(d){return [d.total, d.tip];});
+          //var typeGroup = typeDimension.group()
+          //var typeGroup = typeDimension.group(function(d){return d;})
+          var typeGroup = typeDimension.group(function(d){ return d.substring(0,1); })
+
+          facts.add(newData)
+          facts.add(newData2)
+          //newData & newData2 are summarised into the one line due to same firstletter in type.
+          //when typeDimension is group'd on substring(0,1) all b### types are grouped together
+          print_filter('typeGroup')
+          console.log(typeGroup.size())
+          console.log(typeGroup.all())
+          console.log(typeGroup.top(1))
         </script>
       Hello world
 
