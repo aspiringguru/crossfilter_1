@@ -44,7 +44,10 @@
 
           var typeDimension = facts.dimension(function(d){return d.type;});
           var tipDimension = facts.dimension(function(d){return d.tip;});
-          var multiDimension = facts.dimension(function(d){return d.type+":"+d.tip;});          //function will run once for each row in facts
+          var multiDimension = facts.dimension(function(d){return d.type+":"+d.tip;});
+          //function will run once for each row in facts
+          var arrayDimension = facts.dimension(function(d){return [d.type, d.tip];});
+          //returns array instead of single value
           var dateDimension = facts.dimension(function(d){
                                                     var p = new Date(d.date);
                                                     return p.getMonth()+"-"+p.getFullYear();
