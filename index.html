@@ -48,7 +48,13 @@
           var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
 
           //now only calculate when tip is > 0
-          function reduceAdd(i, d)   { return d.tip>0? i+1: i; };
+          //function reduceAdd(i, d)   { return d.tip>0? i+1: i; };
+          function reduceAdd(i,d){
+            console.log(
+              d.tip>0?'type='+d.type+' & tip>0 input: '+i+', tip='+d.tip+', output: '+(i+1):
+                      'type='+d.type+' & tip<=0, input:'+i+', tip='+d.tip+', output: '+i     );
+              return d.tip>0 ? i+1 : i;
+            }
           function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
