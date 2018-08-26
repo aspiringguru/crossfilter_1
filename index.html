@@ -28,14 +28,14 @@
             {date: "2011-11-14T17:29:52Z", quantity: 1, total: 200, tip: 100, type: "visa"}
           ];
 
-          data.forEach(function(d){
-            //takes in string, converts to Date formate, replaces original data.date value
-            var template = new Date(d.date);
-            d.date = template;
-          })
+          // data.forEach(function(d){
+          //   //takes in string, converts to Date formate, replaces original data.date value
+          //   var template = new Date(d.date);
+          //   d.date = template;
+          // })
 
-          var newData = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bitcoin"}]
-          var newData2 = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bananas"}]
+          //var newData = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bitcoin"}]
+          //var newData2 = [{date: "2011-11-14T17:00:00Z", quantity: 1, total: 200, tip: 100, type: "bananas"}]
           var facts = crossfilter(data);
 
           var typeDimension    = facts.dimension(function(d){return d.type;});
@@ -46,7 +46,8 @@
 
           var typeGroup = typeDimension.group()
           var dateGroup = dateDimension.group()
-          var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
+          //.getDay is broken when d.date is a string not a date.
+          //var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
 
           //now only calculate when tip is > 0
           //function reduceAdd(i, d)   { return d.tip>0? i+1: i; };
@@ -59,17 +60,35 @@
           function reduceRemove(i, d){ return d.tip>0? i-1: i; };
           function reduceInitial(){ return 0;};//sets initial value of index.
 
+          dateDimension.filterExact("2011-11-14T17:29:52Z");
+          //this works when date is not converted to date format
+          print_filter('facts');
+          console.log("--------------------------------------");
+          dateDimension.filterExact(new Date("2011-11-14T17:29:52Z"));
+          //this works when date IS converted to date format
+          print_filter('facts');
+
+
+          console.log("--------------------------------------");
+          dateDimension.filter("2011-11-14T17:29:52Z");
+          //this works when date is not converted to date format
+          print_filter('facts');
+          console.log("--------------------------------------");
+          dateDimension.filter(new Date("2011-11-14T17:29:52Z"));
+          //this works when date IS converted to date format
+          print_filter('facts');
+
           //NB: filter(null) IS NOT THE SAME AS filterExact(null)
           //ITs A TRAP!!!!
           //TO reset all the filters use filterAll()
-          console.log("------------------------tipDimension.filterExact(null)-------------------------------")
-          print_filter('tipDimension.filterExact(null)');
-          console.log("------------tipDimension.filter(null)--(wrong result, includes non zero values--")
-          print_filter('tipDimension.filter(null)');
-          console.log("------------------------tipDimension.filter(0)-------------------------------")
-          print_filter('tipDimension.filter(0)');
-          console.log("------------------------tipDimension.filterAll()-------------------------------")
-          print_filter('tipDimension.filterAll()');
+          // console.log("------------------------tipDimension.filterExact(null)-------------------------------")
+          // print_filter('tipDimension.filterExact(null)');
+          // console.log("------------tipDimension.filter(null)--(wrong result, includes non zero values--")
+          // print_filter('tipDimension.filter(null)');
+          // console.log("------------------------tipDimension.filter(0)-------------------------------")
+          // print_filter('tipDimension.filter(0)');
+          // console.log("------------------------tipDimension.filterAll()-------------------------------")
+          // print_filter('tipDimension.filterAll()');
           //console.log("------------------------typeDimension.filter('tab')-------------------------------")
           //print_filter("typeDimension.filterExact('tab')");
           //console.log("------------------------typeDimension.filter('cash')-------------------------------")
