@@ -63,12 +63,20 @@
           function reduceInitial(){ return 0;};//sets initial value of index.
 
           dateDimension.filterFunction(function(d){
-            //console.log("d.getHours():"+d.getHours())
-            //return d.getHours()==4;
-            console.log("d.getDay():"+d.getDay())
-            return d.getDay()==2;
+            console.log("d.getHours():"+d.getHours())
+            return d.getHours()==4;
+            //console.log("d.getDay():"+d.getDay())
+            //return d.getDay()==2;
           });
-          console.log(facts.groupAll().value());
+          console.log("facts.groupAll().value():"+facts.groupAll().value());
+          //this obeys/uses the filters already defined above & returns a count of 6 rows
+
+          console.log("typeDimension.groupAll().value():"+typeDimension.groupAll().value());
+          //this gives same number of rows (6) as above.
+          console.log("dateDimension.groupAll().value():"+dateDimension.groupAll().value());
+          //groupAll ignores filters on it's own dimension. returns 14
+          //NB:  we added 2 rows to the original 12
+
           console.log("---------------------------")
           print_filter('facts');
 
