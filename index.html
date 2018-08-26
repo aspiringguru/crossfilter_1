@@ -53,7 +53,30 @@
           var dayGroup = dateDimension.group(function(d){ return d.getDay(); })
 
           console.log(facts.groupAll().value());
+          console.log(facts.groupAll().reduceCount().value());
+          //these two lines are same., by default groupAll() run reduceCount()
+
           console.log(typeDimension.groupAll().value());
+          console.log(typeDimension.groupAll().reduceCount().value());
+          //these two lines are same., by default groupAll() run reduceCount()
+
+          print_filter(typeDimension.groupAll());
+          print_filter(typeDimension.groupAll().reduceCount());
+          //these two lines are same., by default groupAll() run reduceCount()
+          console.log("-------------------print_filter(typeGroup)------------------")
+          print_filter(typeGroup)
+          console.log("-------------------print_filter(typeGroup)------------------")
+
+          var typeGroup2 = crossfilter(data).dimension(function(d){return d.type;}).group(function(d){ return d.substring(0,1); } );
+          console.log("-------------------print_filter(typeGroup2)------------------")
+          print_filter(typeGroup2)
+          console.log("-------------------print_filter(typeGroup2)------------------")
+          //this line replaces multiple lines above
+
+          console.log(typeDimension.groupAll().value());
+          console.log("--------------------------------------------------------------------")
+          console.log(facts.groupAll().reduceSum(function(d){ return d.total; }).value() );
+          console.log(typeDimension.groupAll().reduceSum(function(d){ return d.total; }).value() );
 
         </script>
       Hello world
